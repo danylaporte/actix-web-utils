@@ -29,10 +29,10 @@ This is still tracing but also implement validation. This requires feature `vali
 
 ```rust
 use actix_web::{Result, post, HttpResponse};
-use actix_web_utils::{Json, Validated};
+use actix_web_utils::JsonValid;
 
 #[post("/")]
-async fn login(data: Json<TodoData, Validated>) -> Result<HttpResponse> {
+async fn login(data: JsonValid<TodoData>) -> Result<HttpResponse> {
     // do something with data...
     Ok(HttpResponse::Ok().finish())
 }

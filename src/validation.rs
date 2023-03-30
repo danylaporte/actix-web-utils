@@ -36,13 +36,13 @@ impl ResponseError for BadRequest {
 }
 
 #[derive(Clone, Copy, Debug)]
-pub struct NotValidated;
+pub(crate) struct NotValidated;
 
 #[cfg(feature = "validator")]
 #[derive(Clone, Copy, Debug)]
-pub struct Validated;
+pub(crate) struct Validated;
 
-pub trait Valid<T> {
+pub(crate) trait Valid<T> {
     fn valid(value: &T) -> Result<()>;
 }
 

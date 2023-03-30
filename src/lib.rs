@@ -29,10 +29,10 @@
 //!
 //! ```
 //! use actix_web::{Result, post, HttpResponse};
-//! use actix_web_utils::{Json, Validated};
+//! use actix_web_utils::JsonValid;
 //!
 //! #[post("/")]
-//! async fn login(data: Json<TodoData, Validated>) -> Result<HttpResponse> {
+//! async fn login(data: JsonValid<TodoData>) -> Result<HttpResponse> {
 //!     // do something with data...
 //!     Ok(HttpResponse::Ok().finish())
 //! }
@@ -47,7 +47,14 @@
 //!
 
 mod json;
+mod json_config;
+#[cfg(feature = "validator")]
+mod json_valid;
 mod validation;
 
-pub use json::{Json, JsonConfig, JsonExtractFut};
-pub use validation::*;
+pub use json::Json;
+pub use json_config::JsonConfig;
+use json_config::JsonExtractInternalFut;
+#[cfg(feature = "validator")]
+pub use json_valid::JsonValid;
+use validation::*;
